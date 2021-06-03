@@ -21,7 +21,7 @@ void setup(){
 
   M5.Speaker.begin();
   M5.Power.begin();
-  M5.Lcd.setRotation(1);
+  M5.Lcd.setRotation(3);
   M5.Lcd.setBrightness(brightness);
 
   M5.Lcd.fillScreen(BLUE);
@@ -40,6 +40,7 @@ void loop(){
 
 BLYNK_WRITE(V0){
   int val = param[0].asInt();
+  M5.Lcd.setBrightness(brightness);
   if(val == 0){
     M5.Lcd.fillScreen(BLUE);
     M5.Lcd.setTextSize(5);
@@ -51,9 +52,18 @@ BLYNK_WRITE(V0){
   if(val == 1){
     M5.Lcd.fillScreen(RED);
     M5.Lcd.setTextSize(5);
-    M5.Lcd.setCursor(50, 100);
+    M5.Lcd.setCursor(70, 100);
     M5.Lcd.setTextColor(WHITE);
     M5.Lcd.print("ON AIR\n"); 
+    delay(1000);
+  }
+}
+
+BLYNK_WRITE(V1){
+  int val = param[0].asInt();
+  if(val == 1){
+    M5.Lcd.setBrightness(0);
+    M5.Lcd.fillScreen(BLACK);
     delay(1000);
   }
 }
